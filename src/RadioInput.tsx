@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CheckboxInput({
+export default function RadioInput({
   name,
   value,
   labelText,
@@ -16,7 +16,7 @@ export default function CheckboxInput({
     <label htmlFor={id}>
       {labelPosition === 'before' ? labelText : ''}
 
-      <input {...props} type='checkbox' name={name} value={value} id={id} />
+      <input {...props} type='radio' name={name} value={value} id={id} />
 
       {labelPosition === 'after' ? labelText : ''}
     </label>
