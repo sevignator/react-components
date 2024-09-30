@@ -10,7 +10,7 @@ export default function CheckboxInput({
   const id = React.useId();
 
   return (
-    <label>
+    <label htmlFor={id}>
       {labelPosition === 'before' && labelPosition}
 
       <input {...props} type='checkbox' name={name} id={id} />
