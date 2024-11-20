@@ -1,22 +1,22 @@
 import React from 'react';
 
-export default function CheckboxInput({
-  name,
-  value,
-  labelText,
-  labelPosition = 'after',
-  ...props
-}: React.ComponentProps<'input'> & {
+interface CheckboxInputProps extends React.ComponentPropsWithoutRef<'input'> {
   labelText: string;
   labelPosition?: 'before' | 'after';
-}) {
+}
+
+export default function CheckboxInput({
+  labelText,
+  labelPosition = 'after',
+  ...rest
+}: CheckboxInputProps) {
   const id = React.useId();
 
   return (
     <label htmlFor={id}>
       {labelPosition === 'before' ? labelText : ''}
 
-      <input {...props} type='checkbox' name={name} value={value} id={id} />
+      <input {...rest} type='checkbox' id={id} />
 
       {labelPosition === 'after' ? labelText : ''}
     </label>

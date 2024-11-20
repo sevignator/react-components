@@ -33,9 +33,6 @@ function App() {
         </Details>
       </Accordion>
 
-      <h2>CheckboxInput</h2>
-      <CheckboxInput labelText='Test checkbox' />
-
       <h2>Details</h2>
       <Details labelText='Details label 1'>
         <p>
@@ -63,6 +60,9 @@ function App() {
           Cum in libero obcaecati odio culpa tenetur blanditiis laboriosam.
         </p>
       </Details>
+
+      <h2>CheckboxInput</h2>
+      <CheckboxInput labelText='Test checkbox' />
 
       <h2>RadioInput</h2>
       <RadioInput labelText='Test checkbox' />
