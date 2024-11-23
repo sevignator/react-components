@@ -1,7 +1,6 @@
 import React from 'react';
 
 type ValidLabelTags = keyof JSX.IntrinsicElements;
-type ValidWrapperTags = HTMLDivElement | HTMLElement;
 
 interface GroupAccordionProps extends React.ComponentPropsWithoutRef<'div'> {
   isLandmark: false;
@@ -20,16 +19,15 @@ interface LandmarkAccordionProps
 
 type AccordionProps = GroupAccordionProps | LandmarkAccordionProps;
 
-export default function Accordion({
+function Accordion({
   children,
   labelText,
   labelTag = 'p',
   isLandmark = false,
   ...rest
 }: AccordionProps) {
-  const wrapperRef = React.useRef<ValidWrapperTags>(null);
-  const WrapperTag = isLandmark ? 'section' : 'div';
-  const labelId = `accordion-${React.useId()}`;
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const labelId = React.useId();
   const LabelTag = labelTag;
 
   React.useEffect(() => {
@@ -59,10 +57,21 @@ export default function Accordion({
     };
   }, []);
 
-  return (
-    <WrapperTag ref={wrapperRef} {...rest} aria-labelledby={labelId}>
-      {labelText && <LabelTag id={labelId}>{labelText}</LabelTag>}
-      {children}
-    </WrapperTag>
-  );
+  if (isLandmark) {
+    return (
+      <section ref={wrapperRef} {...rest} aria-labelledby={labelId}>
+        {labelText && <LabelTag id={labelId}>{labelText}</LabelTag>}
+        {children}
+      </section>
+    );
+  } else {
+    return (
+      <div ref={wrapperRef} {...rest}>
+        {labelText && <LabelTag>{labelText}</LabelTag>}
+        {children}
+      </div>
+    );
+  }
 }
+
+export default Accordion;
