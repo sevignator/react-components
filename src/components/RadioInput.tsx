@@ -5,22 +5,28 @@ interface RadioInputProps extends React.ComponentPropsWithoutRef<'input'> {
   labelPosition?: 'before' | 'after';
 }
 
-export default function RadioInput({
-  name,
-  value,
-  labelText,
-  labelPosition = 'after',
-  ...rest
-}: RadioInputProps) {
+function RadioInput(
+  { name, value, labelText, labelPosition = 'after', ...rest }: RadioInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const id = React.useId();
 
   return (
     <label htmlFor={id}>
       {labelPosition === 'before' ? labelText : ''}
 
-      <input {...rest} type='radio' name={name} value={value} id={id} />
+      <input
+        ref={ref}
+        {...rest}
+        type='radio'
+        name={name}
+        value={value}
+        id={id}
+      />
 
       {labelPosition === 'after' ? labelText : ''}
     </label>
   );
 }
+
+export default React.forwardRef(RadioInput);

@@ -6,17 +6,17 @@ interface DetailsProps extends React.ComponentPropsWithoutRef<'details'> {
   isOpen?: boolean;
 }
 
-export default function Details({
-  children,
-  labelText,
-  isOpen = false,
-  ...rest
-}: DetailsProps) {
+function Details(
+  { children, labelText, isOpen = false, ...rest }: DetailsProps,
+  ref: React.ForwardedRef<HTMLDetailsElement>
+) {
   return (
-    <details {...rest} open={isOpen}>
+    <details ref={ref} {...rest} open={isOpen}>
       <summary>{labelText}</summary>
 
       {children}
     </details>
   );
 }
+
+export default React.forwardRef(Details);

@@ -5,18 +5,16 @@ interface SelectInputProps extends React.ComponentPropsWithoutRef<'select'> {
   options: [value: string, text: string][];
 }
 
-export default function SelectInput({
-  labelText,
-  options,
-  name,
-  ...rest
-}: SelectInputProps) {
+function SelectInput(
+  { labelText, options, name, ...rest }: SelectInputProps,
+  ref: React.ForwardedRef<HTMLSelectElement>
+) {
   const id = React.useId();
 
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
-      <select {...rest} name={name} id={id}>
+      <select ref={ref} {...rest} name={name} id={id}>
         {options.map((option) => (
           <option value={option[0]}>{option[1]}</option>
         ))}
@@ -24,3 +22,5 @@ export default function SelectInput({
     </>
   );
 }
+
+export default React.forwardRef(SelectInput);

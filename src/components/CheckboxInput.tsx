@@ -5,20 +5,21 @@ interface CheckboxInputProps extends React.ComponentPropsWithoutRef<'input'> {
   labelPosition?: 'before' | 'after';
 }
 
-export default function CheckboxInput({
-  labelText,
-  labelPosition = 'after',
-  ...rest
-}: CheckboxInputProps) {
+function CheckboxInput(
+  { labelText, labelPosition = 'after', ...rest }: CheckboxInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const id = React.useId();
 
   return (
     <label htmlFor={id}>
       {labelPosition === 'before' ? labelText : ''}
 
-      <input {...rest} type='checkbox' id={id} />
+      <input ref={ref} {...rest} type='checkbox' id={id} />
 
       {labelPosition === 'after' ? labelText : ''}
     </label>
   );
 }
+
+export default React.forwardRef(CheckboxInput);
